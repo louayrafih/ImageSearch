@@ -1,0 +1,37 @@
+﻿<UserControl x:Class="ImageSearch.View.GeocoordinateSearchView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ImageSearch.View"
+             mc:Ignorable="d" >
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Polygon Input -->
+        <GroupBox Header="Geocoordinate Search" Grid.Row="0" Padding="8">
+            <StackPanel>
+                <ItemsControl ItemsSource="{Binding PolygonPoints}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" Margin="5">
+                                <TextBlock Text="Lat."/>
+                                <TextBox Width="100" Margin="5"
+                                         Text="{Binding Latitude, StringFormat=F6, UpdateSourceTrigger=PropertyChanged}"
+                                         />
+                                <TextBlock Text="Long."/>
+                                <TextBox Width="100" Margin="5"
+                                         Text="{Binding Longitude, StringFormat=F6, UpdateSourceTrigger=PropertyChanged}" 
+                                         />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <Button Content="Remove Last Point" Command="{Binding RemoveLastPointCommand}" Margin="5"/>
+                <Button Content="Add Point" Command="{Binding AddPointCommand}" Margin="5"/>
+            </StackPanel>
+        </GroupBox>
+    </Grid>
+</UserControl>

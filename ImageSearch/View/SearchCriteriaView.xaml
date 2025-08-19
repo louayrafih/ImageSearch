@@ -1,0 +1,43 @@
+﻿<UserControl x:Class="ImageSearch.View.SearchCriteriaView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ImageSearch.View"
+             mc:Ignorable="d" >
+    <StackPanel VerticalAlignment="Top">
+        <Label Content="Search Criteria" Grid.Column="3" Grid.Row="1" VerticalAlignment="Center"/>
+        <ItemsControl ItemsSource="{Binding SearchCriteria}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <DockPanel Margin="0,5,0,5">
+                        <!-- Property Dropdown -->
+                        <ComboBox Width="120" Margin="0,0,5,0"
+                      ItemsSource="{Binding DataContext.AvailableProperties, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                      SelectedItem="{Binding Property, Mode=TwoWay}" />
+
+                        <!-- Operator Dropdown -->
+                        <ComboBox Width="60" Margin="0,0,5,0"
+                      ItemsSource="{Binding DataContext.AvailableOperators, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                      SelectedItem="{Binding Operator, Mode=TwoWay}" />
+
+                        <!-- Value Input -->
+                        <TextBox Width="100" Margin="0,0,5,0"
+                     Text="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+                        <!-- Remove Button -->
+                        <Button Content="✕" Width="25" 
+                    Command="{Binding DataContext.RemoveCriteriaCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                    CommandParameter="{Binding}" />
+                    </DockPanel>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+        <!-- Add Criteria Button -->
+        <Button Content="Add Criteria" 
+    Command="{Binding AddCriteriaCommand}" 
+    Margin="0,10,0,0"/>
+        <local:GeocoordinateSearchView />
+    </StackPanel>
+</UserControl>
